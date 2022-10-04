@@ -8,6 +8,8 @@ import Message from '../components/Message'
 const CartScreen = () => {
   const {id}=useParams()
   const location = useLocation();
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const history=useNavigate()
   const productId=id
 
@@ -28,7 +30,11 @@ const CartScreen = () => {
     dispatch(removeFromCart(id))
   }
   const checkoutHandler=()=>{
-    history('/login?redirect=shipping')
+    if (!userInfo) {
+      history('/login')
+      } else {
+        history('/shipping')
+      }
   }
 
   return (

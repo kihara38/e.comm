@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Form, Button,Row,Col} from 'react-bootstrap'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {getUserDetails,updateUserProfile} from '../actions/userActions'
@@ -19,8 +19,9 @@ const ProfileScreen = () => {
   const userDetails=useSelector(state=>state.userDetails)
   const{loading,error,user}=userDetails
 
-  const userLogin=useSelector(state=>state.userDetails)
-  const{userInfo}=userLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  
 
   const userUpdateProfile=useSelector(state=>state.userDetails)
   const{success}=userUpdateProfile
@@ -28,17 +29,18 @@ const ProfileScreen = () => {
   
 
   useEffect(()=>{
-    if (userInfo) {
+    if (!userInfo) {
       history('/login')
-      setName(user.name)
-      setEmail(user.email)
-      console.log(userInfo)
-    }else if(user.name){
+      setName(userInfo.name)
+      setEmail(userInfo.email)
+      console.log(userInfo.name)
+      
+    }else if(!userInfo.name){
         dispatch(getUserDetails('profile'))
     }else{
-          setName(user.name)
-          setEmail(user.email)
-          console.log(user.email)
+          setName(userInfo.name)
+          setEmail(userInfo.email)
+          
     }
     
    
