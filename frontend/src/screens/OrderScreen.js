@@ -18,12 +18,14 @@ const OrderScreen = () => {
 
   const[sdkReady, setSdkReady]=useState(false)
 
- const orderDetails = useSelector(state => state.orderDetails)
- const { order, loading, error } = orderDetails
+  const orderDetails = useSelector(state => state.orderDetails)
+  const { order, loading, error } = orderDetails
+  console.log(orderDetails)
+ 
 
  const orderPay = useSelector(state => state.orderPay)
  const {  loading:loadingPay, success:successPay } = orderPay
-
+ console.log(orderPay)
 
   if(!loading){
    //Calculate Prices
@@ -61,7 +63,7 @@ const OrderScreen = () => {
    },[orderId,dispatch,successPay,order])
 
    const successPaymentHandler=(paymentResult)=>{
-      console.log(paymentResult)
+      
       dispatch(payOrder(orderId,paymentResult))
    }
 
