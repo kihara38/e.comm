@@ -67,7 +67,7 @@ export const getOrderDetails=(id)=>async (dispatch, getState)=>{
  } 
 }
 
-export const payOrder = ({id, paymentResult}) => async (
+export const payOrder = (orderId, paymentResult) => async (
   dispatch,
   getState
 ) => {
@@ -88,7 +88,7 @@ export const payOrder = ({id, paymentResult}) => async (
     }
 
     const { data } = await axios.put(
-      `/api/orders/${id}/pay`,
+      `http://localhost:5000/api/orders/pay/${orderId}`,
       paymentResult,
       config
     )
@@ -108,7 +108,6 @@ export const payOrder = ({id, paymentResult}) => async (
     })
   }
 }
-
 export const listMyOrders = () => async (
   dispatch,
   getState
@@ -129,8 +128,7 @@ export const listMyOrders = () => async (
     }
 
     const { data } = await axios.get(
-      `/api/orders/myorders`,
-      config
+      `http://localhost:5000/api/orders/myorders`,config
     )
 
     dispatch({
