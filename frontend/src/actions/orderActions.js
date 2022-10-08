@@ -15,7 +15,7 @@ export const createOrder=(order)=>async (dispatch, getState)=>{
     Authorization:`Bearer ${userInfo.token}`
    }
   }
-  const { data } = await axios.post(`/api/orders`, order, config)
+  const { data } = await axios.post(`http://localhost:5000/api/orders`, order, config)
   
   
   dispatch({
@@ -48,7 +48,7 @@ export const getOrderDetails=(id)=>async (dispatch, getState)=>{
     Authorization:`Bearer ${userInfo.token}`
    }
   }
-  const { data } = await axios.get(`/api/orders/${id}`, config)
+  const { data } = await axios.get(`http://localhost:5000/api/orders/${id}`, config)
   
   
   dispatch({
@@ -82,7 +82,6 @@ export const payOrder = (orderId, paymentResult) => async (
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     }

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 import {useNavigate,useParams} from 'react-router-dom'
-import {Button,Row, Col,ListGroup,Image,Card} from 'react-bootstrap'
+import {Row, Col,ListGroup,Image,Card} from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {useDispatch, useSelector} from 'react-redux'
@@ -24,7 +24,6 @@ const OrderScreen = () => {
 
  const orderPay = useSelector(state => state.orderPay)
  const {  loading:loadingPay, success:successPay } = orderPay
- console.log(orderPay)
 
   if(!loading){
    //Calculate Prices

@@ -55,7 +55,7 @@ const getOrderByID = asyncHandler(async (req, res) => {
 // @route   POST /api/orders/:id/pay
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  console.log(`hear:${req.params.id}`)
+  
   const order=await Order.findById(req.params.id)
   
   if(order){
@@ -69,7 +69,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     }
 
     const updatedOrder=await order.save()
-
+    console.log(`hear:${order}`)
     res.json(updatedOrder)
 
   }else{
