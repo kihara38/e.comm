@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {useParams,useLocation,useNavigate,Link} from 'react-router-dom'
+import {useParams,useNavigate,Link} from 'react-router-dom'
 import {Form, Button,} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
@@ -8,7 +8,6 @@ import FormContainer from '../components/FormContainer'
 import {getUserDetails, updateUser} from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 const UserEditScreen = () => {
- const location = useLocation();
  const history=useNavigate()
  const {id}=useParams()
  const userId=id

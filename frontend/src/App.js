@@ -36,15 +36,20 @@ const App=()=> {
         <Route path="/login" element={<LoginScreen/>}/>
         <Route path="/register" element={<RegisterScreen/>}/>
         <Route path="/profile" element={<ProfileScreen/>}/>
-        <Route path='/' element={<Homescreen/>} exact />
+        
         <Route path='/product/:id' element={<ProductScreen/>}/>
         <Route path="/cart/:id" element={<CartsScreen />} />
         <Route path="/cart" element={<CartsScreen />} />
         <Route path="/admin/userlist" element={<UserListScreen />} />
-        <Route path="/admin/productlist" element={<ProductListScreen />} />
+        <Route path="/admin/productlist" element={<ProductListScreen />} exact/>
+        <Route path="/admin/productlist/pageNumber" element={<ProductListScreen />} exact/>
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
         <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
         <Route path="/admin/orderlist" element={<OrderListScreen/>} />
+        <Route path='/search/:keyword' element={<Homescreen/>} exact />
+        <Route path='/search/:keyword/page/:pageNumber' element={<Homescreen/>} exact />
+        <Route path='/page/:pageNumber' element={<Homescreen/>} exact />
+        <Route path='/' element={<Homescreen/>} exact />
         
         
         

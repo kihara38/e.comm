@@ -4,6 +4,7 @@ import {Table, Button,Row,Col} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
 import {LinkContainer} from 'react-router-bootstrap'
 import { createProduct, deleteProduct, listProducts } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
@@ -11,10 +12,10 @@ import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 const ProductListScreen = () => {
  const dispatch=useDispatch()
  const history=useNavigate()
- const {id}=useParams()
+ const {pageNumber}=useParams()
 
  const productList=useSelector(state=>state.productList)
- const {loading, error, Products}=productList
+ const {loading, error, Products,page,pages}=productList
 
  const productCreate=useSelector(state=>state.productCreate)
  const {
@@ -38,9 +39,9 @@ const ProductListScreen = () => {
   if(successCreate){
     history(`/admin/product/${createdProduct._id}/edit`)
   } else{
-    dispatch(listProducts())
+    dispatch(listProducts('',pageNumber))
   }  
- },[dispatch,history, userInfo,successDelete,successCreate,createdProduct])
+ },[dispatch,history, userInfo,successDelete,successCreate,createdProduct,pageNumber])
 
  const deleteHandler=(id)=>{
   if(window.confirm('Are You sure')){
@@ -70,6 +71,7 @@ const ProductListScreen = () => {
     {loadingCreate && <Loader/>}
     {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
     {loading ? <Loader/> :error ? <Message variant='danger'>{error}</Message> :(
+      <>
      <Table striped bordered hover responsive className='table-sm'>
       <thead>
        <tr>
@@ -103,6 +105,8 @@ const ProductListScreen = () => {
        ))}
       </tbody>
      </Table>
+     <Paginate pages={pages} page={page} isAdmin={true} />
+     </>
     )}
    </>
   )
