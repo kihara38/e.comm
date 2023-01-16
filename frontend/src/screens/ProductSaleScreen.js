@@ -14,17 +14,21 @@ const ProductSaleScreen = () => {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
 
-  const [products, setProducts] = useState(() => {
-    const paidOrders = orders.filter((o) => o.isPaid === true);
-    let products = [];
-    for (let order in paidOrders) {
-      for (let orderDetail in order.orderItems) {
-        products.push(orderDetail);
-      }
-    }
-    return products;
-  });
+  const paidOrders = orders?.filter((o) => o.isPaid === true);
+  let products = paidOrders
+    ?.map((order) => {
+      return order?.orderItems
+        ?.map((item) => {
+          return item.product;
+        })
+        .filter((item) => {
+          return item;
+        });
+    })
+    .flat();
+
   console.log('order', orders);
+  console.log(products);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -56,7 +60,7 @@ const ProductSaleScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products?.map((product) => (
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>

@@ -128,7 +128,9 @@ const getPaidItems = asyncHandler(async (req, res) => {
 // @route   POST /api/orders/myorders
 // @access  Private
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name');
+  const orders = await Order.find({})
+    .populate('user', 'id name')
+    .populate('orderItems.product');
   res.json(orders);
 });
 
